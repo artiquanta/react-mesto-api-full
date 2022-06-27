@@ -4,6 +4,9 @@ const helmet = require('helmet');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const rateLimit = require('express-rate-limit');
+
+require('dotenv').config();
+
 const { celebrate, Joi, errors } = require('celebrate');
 const {
   urlPattern,
@@ -12,7 +15,6 @@ const {
   NOT_FOUND_CODE,
 } = require('./utils/utils');
 
-const { PORT = 3000 } = process.env;
 const { createUser, login } = require('./controllers/users');
 const { logRequest, logError } = require('./middlewares/logger');
 
@@ -87,6 +89,4 @@ app.use((err, req, res, next) => {
 
 mongoose.connect('mongodb://localhost:27017/mestodb');
 
-app.listen(PORT, () => {
-  console.log('Сервер запущен');
-});
+module.exports = app;

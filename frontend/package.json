@@ -1,7 +1,7 @@
 {
   "name": "mesto-react",
-  "version": "0.5.1",
-  "description": "Проектная работа №12: Mesto: Russia",
+  "version": "1.0.1",
+  "description": "Проектная работа №15: Mesto: Russia",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.4",
@@ -19,7 +19,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "deploy": "scp -r ./build/* artiquanta@51.250.20.42:home/artiquanta/mesto-frontend"
   },
   "eslintConfig": {
     "extends": [

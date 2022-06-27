@@ -40,9 +40,9 @@ export function checkToken(token) {
   return fetch(`${BASE_URL}/users/me`, {
     method: 'GET',
     headers: {
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${token}`
-    }
+      'Content-Type': 'application/json'
+    },
+    credentials: 'include',
   })
     .then(res => checkFetch(res))
     .then(res => res.data)

@@ -7,6 +7,8 @@ const WrongDataError = require('../errors/wrong-data-err');
 const AlreadyExistError = require('../errors/already-exist-err');
 const NotAuthorizedError = require('../errors/not-authorized-err');
 
+const { NODE_ENV, JWT_SECRET } = process.env;
+
 // Создание пользователя
 module.exports.createUser = (req, res, next) => {
   const {
@@ -43,7 +45,11 @@ module.exports.login = (req, res, next) => {
   const { email, password } = req.body;
   User.findUserByCredentials(email, password)
     .then(user => {
-      const token = sign({ _id: user._id }, secretKey, { expiresIn: '7d' });
+      const token = sign(
+        { _id: user._id },
+        NODE_ENV === 'production' ? JWT_SECRET : secretKey,
+        { expiresIn: '7d' },
+      );
       res
         .cookie('jwt', token, {
           maxAge: 60480000,
