@@ -1,0 +1,13 @@
+.popup__field_place_authorization {
+  margin: 50px 0 0 0;
+}
+
+.popup__field_place_authorization:last-of-type {
+  margin: 30px 0 0 0;
+}
+
+@media screen and (max-width: 611px) {
+  .popup__field_place_authorization {
+    margin-top: 40px;
+  }
+}

@@ -1,0 +1,25 @@
+.profile__author {
+  max-width: 292.84px;
+  margin: 0;
+  padding: 0;
+  color: #fff;
+  font-size: 42px;
+  font-weight: 500;
+  line-height: 1.15;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+@media screen and (min-width: 1281px) {
+  .profile__author {
+    max-width: 483.3px;
+  }
+}
+
+@media screen and (max-width: 611px) {
+  .profile__author {
+    max-width: 61.01vw;
+    font-size: 8.75vw;
+  }
+}

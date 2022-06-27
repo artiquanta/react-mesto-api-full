@@ -1,0 +1,15 @@
+.popup__field_position_bottom {
+  margin: 39px 0 48px;
+}
+
+@media screen and (max-width: 611px) {
+  .popup__field_position_bottom {
+    margin-bottom: 45px;
+  }
+}
+
+@media screen and (max-width: 611px) {
+  .popup__field_position_bottom {
+    margin-top: 53px;
+  }
+}

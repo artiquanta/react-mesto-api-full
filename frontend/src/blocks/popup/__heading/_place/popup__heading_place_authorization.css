@@ -1,0 +1,11 @@
+.popup__heading_place_authorization {
+  color: #fff;
+  text-align: center;
+}
+
+@media screen and (max-width: 611px) {
+  .popup__heading_place_authorization {
+    font-size: 6.25vw;
+    line-height: 1.2;
+  }
+}

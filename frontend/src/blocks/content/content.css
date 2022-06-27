@@ -1,0 +1,16 @@
+.content {
+  grid-area: content;
+  display: flex;
+  flex-direction: column;
+  justify-self: center;
+  max-width: 880px;
+  width: 68.75vw;
+  min-width: 530px;
+}
+
+@media screen and (max-width: 611px) {
+  .content {
+    width: 88.25vw;
+    min-width: 282px;
+  }
+}

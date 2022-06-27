@@ -1,0 +1,12 @@
+.cards__image {
+  flex-shrink: 0;
+  height: 282px;
+  border-radius: 10px 10px 0 0;
+  object-fit: cover;
+  object-position: center;
+  transition: .3s;
+}
+
+.cards__image:hover {
+  filter: grayscale(.8);
+}

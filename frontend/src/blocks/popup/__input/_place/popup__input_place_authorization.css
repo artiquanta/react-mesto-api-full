@@ -1,0 +1,14 @@
+.popup__input_place_authorization {
+  background: transparent;
+  border-bottom: 2px solid #ccc;
+  color: #fff;
+  font-weight: 500;
+}
+
+.popup__input:focus {
+  outline: none;
+}
+
+.popup__input::placeholder {
+  color: #ccc;
+}

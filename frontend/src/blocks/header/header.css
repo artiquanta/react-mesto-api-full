@@ -1,0 +1,19 @@
+.header {
+  grid-area: header;
+  display: flex;
+  justify-self: center;
+  justify-content: space-between;
+  align-items: flex-start;
+  max-width: 880px;
+  min-width: 530px;
+  width: 68.75%;
+  border-bottom: 1px solid rgba(84, 84, 84, .7);
+  transition: .2s;
+}
+
+@media screen and (max-width: 611px) {
+  .header {
+    width: 100%;
+    min-width: 320px;
+  }
+}

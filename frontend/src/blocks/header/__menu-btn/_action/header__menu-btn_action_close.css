@@ -1,0 +1,5 @@
+.header__menu-btn_action_close {
+  width: 20px;
+  height: 20px;
+  background-image: url(/src/images/header__menu-btn_type_close.svg);
+}

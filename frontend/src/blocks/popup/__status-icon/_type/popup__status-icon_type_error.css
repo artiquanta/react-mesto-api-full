@@ -1,0 +1,3 @@
+.popup__status-icon_type_error {
+  background-image: url(/src/images/popup__error-icon.svg);
+}

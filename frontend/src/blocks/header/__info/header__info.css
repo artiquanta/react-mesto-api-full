@@ -1,0 +1,19 @@
+.header__info {
+  margin: 6px 0 0 0;
+  display: flex;
+  justify-content: space-between;
+}
+
+@media screen and (max-width: 611px) {
+  .header__info {
+    margin: 0;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    align-self: center;
+    height: 0;
+    visibility: hidden;
+    opacity: 0;
+    transition: .2s;
+  }
+}

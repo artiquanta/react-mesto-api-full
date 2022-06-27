@@ -1,0 +1,5 @@
+.header__menu-btn_action_open {
+  width: 24px;
+  height: 24px;
+  background-image: url(/src/images/header__menu-btn_type_open.svg);
+}

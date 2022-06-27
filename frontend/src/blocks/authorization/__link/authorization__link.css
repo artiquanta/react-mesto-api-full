@@ -1,0 +1,12 @@
+.authorization__link {
+  margin: 15px 0 0 0;
+  font-size: 14px;
+  color: #fff;
+  text-align: center;
+  text-decoration: none;
+  transition: .2s;
+}
+
+.authorization__link:hover {
+  opacity: .6;
+}

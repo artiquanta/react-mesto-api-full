@@ -1,0 +1,24 @@
+.footer {
+  grid-area: footer;
+  max-width: 880px;
+  width: 100%;
+  justify-self: center;
+}
+
+@media screen and (max-width: 1279px) {
+  .footer {
+    width: 90vw;
+  }
+}
+
+@media screen and (max-width: 977px) {
+  .footer {
+    width: 68.75vw;
+  }
+}
+
+@media screen and (max-width: 611px) {
+  .footer {
+    min-width: 282px;
+  }
+}

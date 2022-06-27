@@ -1,0 +1,15 @@
+.page {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat(3, minmax(min-content, max-content));
+  grid-template-areas: 
+  "header"
+  "content"
+  "footer";
+  background-color: #000;
+  min-height: 100vh;
+  height: 100%;
+  font-family: 'Inter', Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
