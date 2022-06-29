@@ -12,7 +12,7 @@
 
 ## Ссылка на проектную работу
 
-IP-адрес сервера: 51.250.20.42
+IP-адрес сервера: 84.201.138.157
 Домен сервера: [quantum.nomoredomains.xyz](https://quantum.nomoredomains.xyz)
 
 Проектная работа доступна на странице [GitHub Pages](https://github.com/artiquanta/react-mesto-api-full)

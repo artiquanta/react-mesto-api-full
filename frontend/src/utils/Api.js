@@ -98,7 +98,7 @@ class Api {
 
 // Создание экземпляра класса API
 const api = new Api({
-  baseUrl: 'https://api.quantum.nomoredomains.xyz',
+  baseUrl: 'http://localhost:3000',
   headers: {
     'Content-Type': 'application/json'
   }

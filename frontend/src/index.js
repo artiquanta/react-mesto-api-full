@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { StrictMode } from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 import './index.css';
@@ -7,11 +7,12 @@ import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
-// Отключён StrictMode для режима разработчика из-за проблем с совместимостью React 18 и React-Router v5
 root.render(
-        <BrowserRouter>
-                <App />
-        </BrowserRouter>
+        <StrictMode>
+                <BrowserRouter>
+                        <App />
+                </BrowserRouter>
+        </StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function

@@ -4,16 +4,16 @@ const helmet = require('helmet');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const rateLimit = require('express-rate-limit');
+const { celebrate, Joi, isCelebrateError } = require('celebrate');
 
 require('dotenv').config();
-
-const { celebrate, Joi, errors } = require('celebrate');
 const {
   urlPattern,
   celebrateErrors,
   DEFAULT_ERROR_CODE,
   NOT_FOUND_CODE,
 } = require('./utils/utils');
+const WrongDataError = require('./errors/wrong-data-err');
 
 const { createUser, login } = require('./controllers/users');
 const { logRequest, logError } = require('./middlewares/logger');
@@ -75,7 +75,14 @@ app.use((req, res) => {
 // Логирование ошибок
 app.use(logError);
 
-app.use(errors());
+// Обработчик ошибок валидации celebrate
+app.use((err, req, res, next) => {
+  if (isCelebrateError(err)) {
+    next(new WrongDataError(err.details.get('body').message));
+  }
+  next(err);
+});
+
 app.use((err, req, res, next) => {
   const { statusCode = DEFAULT_ERROR_CODE, message } = err;
   res

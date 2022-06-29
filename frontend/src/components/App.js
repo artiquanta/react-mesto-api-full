@@ -35,6 +35,7 @@ function App() {
   const [errorData, setErrorData] = useState({});
   const [isTooltipOpen, setTooltipOpen] = useState(false);
   const [isRequestCompleted, setRequestCompleted] = useState(false);
+  const [requestMessage, setRequestMessage] = useState('');
 
   const history = useHistory();
 
@@ -77,11 +78,17 @@ function App() {
 
         }
       })
-      .catch(() => {
+      .catch(err => {
         // отображаем ошибку регистрации
-        setRequestCompleted(false);
-        setTooltipOpen(true);
-      });
+        err.json()
+          .then(err => {
+            setRequestMessage(err.message);
+            setRequestCompleted(false);
+            setTooltipOpen(true);
+          })
+          .catch(err => showError(err));
+      })
+      .catch(err => showError(err));
   }
 
   // Обработчик входа в систему
@@ -92,11 +99,17 @@ function App() {
         setUserEmail(email);
         history.push('/');
       })
-      .catch(() => {
+      .catch(err => {
         // отображаем ошибку авторизации
-        setRequestCompleted(false);
-        setTooltipOpen(true);
-      });
+        err.json()
+          .then(err => {
+            setRequestMessage(err.message)
+            setRequestCompleted(false);
+            setTooltipOpen(true);
+          })
+          .catch(err => showError(err));
+      })
+      .catch(err => showError(err));
   }
 
   // Обработчик выхода из системы
@@ -105,6 +118,7 @@ function App() {
       .then(() => {
         setLoggedIn(false);
         history.push('/sign-in');
+        /* setCards([]); */
       })
       .catch(err => showError(err));
   }
@@ -288,7 +302,8 @@ function App() {
           <InfoTooltip
             isOpen={isTooltipOpen}
             onClose={closeAllPopups}
-            isRequestCompleted={isRequestCompleted} />
+            isRequestCompleted={isRequestCompleted}
+            requestMessage={requestMessage} />
         </AppContext.Provider>
         <Loader
           isLoading={isLoading} />
