@@ -4,8 +4,8 @@
   "description": "Проектная работа №15: Mesto: Russia (фронтенд + бэкенд)",
   "main": "index.js",
   "scripts": {
-    "start": "node app.js",
-    "dev": "nodemon app.js",
+    "start": "node server.js",
+    "dev": "nodemon server.js",
     "lint": "npx eslint .",
     "test": "jest"
   },
@@ -31,7 +31,8 @@
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.3.5",
     "validator": "^13.7.0",
-    "winston": "^3.8.0"
+    "winston": "^3.8.0",
+    "winston-daily-rotate-file": "^4.7.1"
   },
   "devDependencies": {
     "eslint": "^8.2.0",

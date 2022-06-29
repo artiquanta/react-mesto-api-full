@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const { celebrate, Joi } = require('celebrate');
 const {
-  getUsers, getUser, getCurrentUser, updateUser, updateAvatar,
+  getUsers, getUser, getCurrentUser, updateUser, updateAvatar, logout,
 } = require('../controllers/users');
 const { urlPattern, celebrateErrors } = require('../utils/utils');
 
@@ -10,6 +10,9 @@ router.get('/', getUsers);
 
 // Запрос информации о текущем пользователе
 router.get('/me', getCurrentUser);
+
+// Выход пользователя из системы
+router.get('/logout', logout);
 
 // Запрос информации о пользователе по ID
 router.get('/:id', celebrate({

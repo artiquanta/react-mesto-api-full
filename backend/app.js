@@ -34,7 +34,7 @@ app.use(rateLimit({
 app.use(logRequest);
 
 // CORS
-app.use(require('./middlewares/corsOptions'));
+app.use(require('./middlewares/cors'));
 
 // Краш-тест
 app.get('/crash-test', () => {

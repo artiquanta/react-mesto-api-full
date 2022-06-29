@@ -30,7 +30,7 @@ class Api {
       body: JSON.stringify({
         name: name,
         about: about
-      })
+      }),
     })
       .then(res => this._checkFetch(res))
   }
@@ -43,7 +43,7 @@ class Api {
       body: JSON.stringify({
         name: name,
         link: link
-      })
+      }),
     })
       .then(res => this._checkFetch(res))
   }
@@ -82,7 +82,7 @@ class Api {
       credentials: 'include',
       body: JSON.stringify({
         avatar: link
-      })
+      }),
     })
       .then(res => this._checkFetch(res))
   }

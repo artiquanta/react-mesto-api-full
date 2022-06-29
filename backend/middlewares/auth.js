@@ -9,11 +9,11 @@ module.exports = (req, res, next) => {
   if (!jwt) {
     throw new NotAuthorizedError('Ошибка авторизации');
   }
-  const token = jwt.replace('Bearer ', '');
+
   let payload;
 
   try {
-    payload = verify(token, NODE_ENV === 'production' ? JWT_SECRET : secretKey);
+    payload = verify(jwt, NODE_ENV === 'production' ? JWT_SECRET : secretKey);
   } catch (err) {
     throw new NotAuthorizedError('Ошибка авторизации');
   }

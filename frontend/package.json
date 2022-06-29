@@ -19,7 +19,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
-    "deploy": "scp -r ./build/* artiquanta@51.250.20.42:home/artiquanta/mesto-frontend"
+    "deploy": "scp -r ./build/* artiquanta@84.201.138.157:/home/artiquanta/web-mesto/frontend"
   },
   "eslintConfig": {
     "extends": [

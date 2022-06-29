@@ -1,4 +1,4 @@
-export const BASE_URL = 'https://auth.nomoreparties.co';
+export const BASE_URL = 'https://api.qunatum.nomoredomains.xyz';
 
 export function checkFetch(res) {
   if (res.ok) {
@@ -14,7 +14,7 @@ export function register(email, password) {
     headers: {
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({ password, email })
+    body: JSON.stringify({ password, email }),
   })
     .then(res => checkFetch(res))
 }
@@ -25,19 +25,14 @@ export function authorize(email, password) {
     headers: {
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({ password, email })
+    credentials: 'include',
+    body: JSON.stringify({ password, email }),
   })
     .then(res => checkFetch(res))
-    .then(res => {
-      if (res.token) {
-        localStorage.setItem('jwt', res.token);
-        return res;
-      }
-    })
 }
 
-export function checkToken(token) {
-  return fetch(`${BASE_URL}/users/me`, {
+export function logoutUser() {
+  return fetch(`${BASE_URL}/users/logout`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json'
@@ -45,5 +40,4 @@ export function checkToken(token) {
     credentials: 'include',
   })
     .then(res => checkFetch(res))
-    .then(res => res.data)
 }

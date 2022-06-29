@@ -40,7 +40,7 @@ function App() {
 
   // Проверка наличия сохранённого токена
   useEffect(() => {
-    handleTokenCheck();
+    handleAuthCheck();
     //eslint-disable-next-line
   }, [])
 
@@ -87,12 +87,10 @@ function App() {
   // Обработчик входа в систему
   function handleLogin(email, password) {
     auth.authorize(email, password)
-      .then(res => {
-        if (res.token) {
-          setLoggedIn(true);
-          setUserEmail(email);
-          history.push('/');
-        }
+      .then(() => {
+        setLoggedIn(true);
+        setUserEmail(email);
+        history.push('/');
       })
       .catch(() => {
         // отображаем ошибку авторизации
@@ -103,17 +101,20 @@ function App() {
 
   // Обработчик выхода из системы
   function handleSignOut() {
-    localStorage.removeItem('jwt');
-    setLoggedIn(false);
-    history.push('/sign-in');
+    auth.logoutUser()
+      .then(() => {
+        setLoggedIn(false);
+        history.push('/sign-in');
+      })
+      .catch(err => showError(err));
   }
 
-  // Проверка наличия и корректности токена пользователя
-  function handleTokenCheck() {
-    const jwt = localStorage.getItem('jwt');
-    if (jwt) {
-      // авторизуем пользователя
-      auth.checkToken(jwt)
+  // Проверка корректности токена пользователя
+  function handleAuthCheck() {
+    // Проверяем, был ли пользователь ранее авторизован
+    if (document.cookie.includes('auth')) {
+      // Получаем текущего пользователя по имеющемуся токену
+      api.getCurrentUser()
         .then(data => {
           if (data.email) {
             setUserEmail(data.email);
@@ -130,7 +131,7 @@ function App() {
 
   // Обработчик кнопки лайка
   function handleCardLike(card) {
-    const isLiked = card.likes.some(i => i._id === currentUser._id) ? true : false;
+    const isLiked = card.likes.includes(currentUser._id) ? true : false;
 
     (isLiked ? api.removeLike(card._id) : api.addLike(card._id))
       .then(newCard => {
