@@ -113,12 +113,14 @@ function App() {
   }
 
   // Обработчик выхода из системы
-  function handleSignOut() {
+  function handleLogOut() {
     auth.logoutUser()
       .then(() => {
         setLoggedIn(false);
         history.push('/sign-in');
-        /* setCards([]); */
+        setCards([]);
+        setCurrentUser({});
+        setUserEmail('');
       })
       .catch(err => showError(err));
   }
@@ -251,7 +253,7 @@ function App() {
     <div className="page">
       <CurrentUserContext.Provider value={currentUser}>
         <AppContext.Provider value={{ loggedIn: loggedIn, userEmail: userEmail }}>
-          <Header onSignOut={handleSignOut} />
+          <Header onLogOut={handleLogOut} />
           <Switch>
             <Route path="/sign-in">
               <Login onLogin={handleLogin} />

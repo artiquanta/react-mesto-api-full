@@ -1,4 +1,4 @@
-export const BASE_URL = 'http://localhost:3000';
+export const BASE_URL = 'https://api.quantum.nomoredomains.xyz';
 
 export function checkFetch(res) {
   if (res.ok) {

@@ -52,13 +52,17 @@ module.exports.login = (req, res, next) => {
       );
       res
         .cookie('jwt', token, {
+          domain: 'quantum.nomoredomains.xyz',
           maxAge: 604800000,
           httpOnly: true,
           sameSite: true,
+          secure: true,
         })
         .cookie('auth', 'active', {
+          domain: 'quantum.nomoredomains.xyz',
           maxAge: 604800000,
           sameSite: true,
+          secure: true,
         })
         .send({ message: 'Вы успешно авторизовались' });
     })
@@ -71,11 +75,15 @@ module.exports.login = (req, res, next) => {
 module.exports.logout = (req, res, next) => {
   res
     .clearCookie('jwt', {
+      domain: 'quantum.nomoredomains.xyz',
       httpOnly: true,
       sameSite: true,
+      secure: true,
     })
     .clearCookie('auth', {
+      domain: 'quantum.nomoredomains.xyz',
       sameSite: true,
+      secure: true,
     })
     .send({ message: 'Вы успешно вышли из системы. До скорой встречи' });
 };

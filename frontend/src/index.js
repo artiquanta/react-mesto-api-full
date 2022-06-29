@@ -1,4 +1,4 @@
-import React, { StrictMode } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 import './index.css';
@@ -7,12 +7,11 @@ import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
+// StrictMode отключен из-за проблем с совместимостью
 root.render(
-        <StrictMode>
-                <BrowserRouter>
-                        <App />
-                </BrowserRouter>
-        </StrictMode>
+        <BrowserRouter>
+                <App />
+        </BrowserRouter>
 );
 
 // If you want to start measuring performance in your app, pass a function

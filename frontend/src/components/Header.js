@@ -3,7 +3,7 @@ import { Link, Switch, Route } from 'react-router-dom';
 import { AppContext } from '../contexts/AppContext';
 
 function Header(props) {
-  const { onSignOut } = props;
+  const { onLogOut } = props;
   const { loggedIn, userEmail } = useContext(AppContext);
 
   // Состояние для мобильного меню
@@ -24,7 +24,7 @@ function Header(props) {
   const headerBlock =
     <div className={`header__info ${isMenuOpen ? 'header__info_action_show' : ''}`}>
       <p className="header__user-email">{userEmail}</p>
-      <button className="header__logout-btn" onClick={handleSignOut}>Выйти</button>
+      <button className="header__logout-btn" onClick={handleLogOut}>Выйти</button>
     </div>;
 
   // Обработчик открытия/закрытия мобильного меню
@@ -33,9 +33,9 @@ function Header(props) {
   }
 
   // Обработчик кнопки выхода из системы
-  function handleSignOut() {
+  function handleLogOut() {
     setMenuOpen(false);
-    onSignOut();
+    onLogOut();
   }
 
   return (

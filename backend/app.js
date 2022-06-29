@@ -26,8 +26,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 app.use(rateLimit({
-  windowMs: 900000,
-  max: 100,
+  windowMs: 450000,
+  max: 250,
 }));
 
 // Логирование запросов
