@@ -15,7 +15,9 @@ const { logRequest, logError } = require('./middlewares/logger');
 const app = express();
 
 // Установка заголовков и частоты запросов
-app.use(helmet());
+app.use(helmet({
+  hsts: false,
+}));
 app.use(rateLimit({
   windowMs: 450000,
   max: 250,
