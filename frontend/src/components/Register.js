@@ -2,7 +2,7 @@ import { memo, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 function Register(props) {
-  const { onRegister } = props;
+  const { onRegister, isProcessing } = props;
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -46,7 +46,7 @@ function Register(props) {
               id="registration-password-input" minLength="2" maxLength="200" required value={password} onChange={handleChange} />
             <span className="popup__input-error"></span>
           </label>
-          <button className="popup__submit-btn popup__submit-btn_place_authorization" type="submit">Зарегистрироваться</button>
+          <button className="popup__submit-btn popup__submit-btn_place_authorization" type="submit">{isProcessing ? 'Идёт регистрация...' : 'Зарегистрироваться'}</button>
         </form>
         {<Link to="/sign-in" className="authorization__link">Уже зарегистрированы? Войти</Link>}
       </div>

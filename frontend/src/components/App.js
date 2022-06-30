@@ -66,22 +66,25 @@ function App() {
 
   // Регистрация пользователя
   function handleRegister(email, password) {
+    setProcessStatus(true);
     auth.register(email, password) // регистрируем пользователя
       .then(res => {
         if (res.statusCode !== '400') {
+          setProcessStatus(false);
           setRequestCompleted(true);
           setTooltipOpen(true);
           setTimeout(() => {// задержка (без неё запрос не выполняется с кодом 429)
             setTooltipOpen(false);
             handleLogin(email, password); // авторизуем пользователя после регистрации
           }, 3000);
-
         }
+        setProcessStatus(false);
       })
       .catch(err => {
         // отображаем ошибку регистрации
         err.json()
           .then(err => {
+            setProcessStatus(false);
             setRequestMessage(err.message);
             setRequestCompleted(false);
             setTooltipOpen(true);
@@ -93,8 +96,10 @@ function App() {
 
   // Обработчик входа в систему
   function handleLogin(email, password) {
+    setProcessStatus(true);
     auth.authorize(email, password)
       .then(() => {
+        setProcessStatus(false);
         setLoggedIn(true);
         setUserEmail(email);
         history.push('/');
@@ -103,6 +108,7 @@ function App() {
         // отображаем ошибку авторизации
         err.json()
           .then(err => {
+            setProcessStatus(false);
             setRequestMessage(err.message)
             setRequestCompleted(false);
             setTooltipOpen(true);
@@ -256,10 +262,10 @@ function App() {
           <Header onLogOut={handleLogOut} />
           <Switch>
             <Route path="/sign-in">
-              <Login onLogin={handleLogin} />
+              <Login onLogin={handleLogin} isProcessing={isProcessing} />
             </Route>
             <Route path="/sign-up">
-              <Register onLogin={handleLogin} onRegister={handleRegister} />
+              <Register onLogin={handleLogin} onRegister={handleRegister} isProcessing={isProcessing} />
             </Route>
             <ProtectedRoute>
               <Main

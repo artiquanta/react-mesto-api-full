@@ -1,7 +1,7 @@
 import { memo, useState } from 'react';
 
 function Login(props) {
-  const { onLogin } = props;
+  const { onLogin, isProcessing } = props;
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -45,7 +45,7 @@ function Login(props) {
               id="login-password-input" minLength="2" maxLength="200" required value={password} onChange={handleChange} />
             <span className="popup__input-error"></span>
           </label>
-          <button className="popup__submit-btn popup__submit-btn_place_authorization" type="submit">Войти</button>
+          <button className="popup__submit-btn popup__submit-btn_place_authorization" type="submit">{isProcessing ? 'Проверяем данные...' : 'Войти'}</button>
         </form>
       </div>
     </div>
