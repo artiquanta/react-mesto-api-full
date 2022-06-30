@@ -4,31 +4,29 @@ const helmet = require('helmet');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const rateLimit = require('express-rate-limit');
-const { celebrate, Joi, isCelebrateError } = require('celebrate');
+const { celebrate, Joi } = require('celebrate');
 
 require('dotenv').config();
-const {
-  urlPattern,
-  celebrateErrors,
-  DEFAULT_ERROR_CODE,
-  NOT_FOUND_CODE,
-} = require('./utils/utils');
-const WrongDataError = require('./errors/wrong-data-err');
 
+const { urlPattern, celebrateErrors, NOT_FOUND_CODE } = require('./utils/utils');
 const { createUser, login } = require('./controllers/users');
 const { logRequest, logError } = require('./middlewares/logger');
 
 const app = express();
 
+// Установка заголовков и частоты запросов
 app.use(helmet());
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(cookieParser());
-
 app.use(rateLimit({
   windowMs: 450000,
   max: 250,
+  message: {
+    message: 'Слишком много запросов с одного IP. Попробуйте позже, через 7,5 минут',
+  },
 }));
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cookieParser());
 
 // Логирование запросов
 app.use(logRequest);
@@ -43,6 +41,7 @@ app.get('/crash-test', () => {
   }, 0);
 });
 
+// Регистрациия пользователя
 app.post('/signup', celebrate({
   body: Joi.object().keys({
     email: Joi.string().required().email({ tlds: { allow: false } }),
@@ -53,6 +52,7 @@ app.post('/signup', celebrate({
   }).messages(celebrateErrors),
 }), createUser);
 
+// Авторизация пользователя
 app.post('/signin', celebrate({
   body: Joi.object().keys({
     email: Joi.string().required().email({ tlds: { allow: false } }),
@@ -60,6 +60,7 @@ app.post('/signin', celebrate({
   }).messages(celebrateErrors),
 }), login);
 
+// Проверка авторизации пользователя
 app.use(require('./middlewares/auth'));
 
 app.use('/users', require('./routes/users'));
@@ -76,23 +77,10 @@ app.use((req, res) => {
 app.use(logError);
 
 // Обработчик ошибок валидации celebrate
-app.use((err, req, res, next) => {
-  if (isCelebrateError(err)) {
-    next(new WrongDataError(err.details.get('body').message));
-  }
-  next(err);
-});
+app.use(require('./middlewares/celebrateErrorHandler'));
 
-app.use((err, req, res, next) => {
-  const { statusCode = DEFAULT_ERROR_CODE, message } = err;
-  res
-    .status(statusCode)
-    .send({
-      message: statusCode === DEFAULT_ERROR_CODE
-        ? 'На сервере произошла ошибка... Проверьте данные и повторите Ваш запрос чуть позже!'
-        : message,
-    });
-});
+// Централизованный обработчик ошибок
+app.use(require('./middlewares/errorHandler'));
 
 mongoose.connect('mongodb://localhost:27017/mestodb');
 

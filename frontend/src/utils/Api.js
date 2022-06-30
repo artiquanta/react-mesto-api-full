@@ -1,3 +1,5 @@
+import { BASE_URL } from './auth';
+
 class Api {
   constructor({ baseUrl, headers }) {
     this._baseUrl = baseUrl;
@@ -98,7 +100,7 @@ class Api {
 
 // Создание экземпляра класса API
 const api = new Api({
-  baseUrl: 'https://api.quantum.nomoredomains.xyz',
+  baseUrl: BASE_URL,
   headers: {
     'Content-Type': 'application/json'
   }

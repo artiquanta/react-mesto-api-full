@@ -31,12 +31,12 @@ module.exports.createUser = (req, res, next) => {
     }))
     .catch(err => {
       if (err.name === 'ValidationError') {
-        next(new WrongDataError('Переданы некорректные данные при создании пользователя'));
+        return next(new WrongDataError('Переданы некорректные данные при создании пользователя'));
       }
       if (err.code === 11000) {
-        next(new AlreadyExistError('Указанный Email уже зарегистрирован'));
+        return next(new AlreadyExistError('Указанный Email уже зарегистрирован'));
       }
-      next(err);
+      return next(err);
     });
 };
 
@@ -56,13 +56,11 @@ module.exports.login = (req, res, next) => {
           maxAge: 604800000,
           httpOnly: true,
           sameSite: true,
-          secure: true,
         })
         .cookie('auth', 'active', {
           domain: 'quantum.nomoredomains.xyz',
           maxAge: 604800000,
           sameSite: true,
-          secure: true,
         })
         .send({ message: 'Вы успешно авторизовались' });
     })
@@ -78,12 +76,10 @@ module.exports.logout = (req, res, next) => {
       domain: 'quantum.nomoredomains.xyz',
       httpOnly: true,
       sameSite: true,
-      secure: true,
     })
     .clearCookie('auth', {
       domain: 'quantum.nomoredomains.xyz',
       sameSite: true,
-      secure: true,
     })
     .send({ message: 'Вы успешно вышли из системы. До скорой встречи' });
 };
@@ -108,9 +104,9 @@ module.exports.getUser = (req, res, next) => {
     }))
     .catch(err => {
       if (err.name === 'CastError') {
-        next(new WrongDataError('Указан некорректный формат _id пользователя'));
+        return next(new WrongDataError('Указан некорректный формат _id пользователя'));
       }
-      next(err);
+      return next(err);
     });
 };
 
@@ -127,9 +123,9 @@ module.exports.getCurrentUser = (req, res, next) => {
     }))
     .catch(err => {
       if (err.name === 'CastError') {
-        next(new WrongDataError('Указан некорректный формат _id пользователя'));
+        return next(new WrongDataError('Указан некорректный формат _id пользователя'));
       }
-      next(err);
+      return next(err);
     });
 };
 
@@ -146,9 +142,9 @@ module.exports.updateUser = (req, res, next) => {
     }))
     .catch(err => {
       if (err.name === 'ValidationError') {
-        next(new WrongDataError('Переданы некорректные данные при обновлении пользователя'));
+        return next(new WrongDataError('Переданы некорректные данные при обновлении пользователя'));
       }
-      next(err);
+      return next(err);
     });
 };
 
@@ -165,8 +161,8 @@ module.exports.updateAvatar = (req, res, next) => {
     }))
     .catch(err => {
       if (err.name === 'ValidationError') {
-        next(new WrongDataError('Переданы некорректные данные при обновлении аватара'));
+        return next(new WrongDataError('Переданы некорректные данные при обновлении аватара'));
       }
-      next(err);
+      return next(err);
     });
 };

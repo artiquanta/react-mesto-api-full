@@ -1,4 +1,5 @@
-export const BASE_URL = 'https://api.quantum.nomoredomains.xyz';
+const URL_PROTOCOL = document.location.href.includes('https://') ? 'https' : 'http';
+export const BASE_URL = `${URL_PROTOCOL}://api.quantum.nomoredomains.xyz`;
 
 export function checkFetch(res) {
   if (res.ok) {
