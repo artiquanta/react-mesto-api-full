@@ -36,13 +36,6 @@ app.use(logRequest);
 // CORS
 app.use(require('./middlewares/cors'));
 
-// Краш-тест
-app.get('/crash-test', () => {
-  setTimeout(() => {
-    throw new Error('Сервер сейчас упадёт');
-  }, 0);
-});
-
 // Регистрациия пользователя
 app.post('/signup', celebrate({
   body: Joi.object().keys({
